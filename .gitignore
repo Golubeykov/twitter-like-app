@@ -88,3 +88,7 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+/Socialcademy App/Resources/
+/Socialcademy App/Resources/GoogleService-Info.plist
+/Socialcademy App/Resources/Assets.xcassets
