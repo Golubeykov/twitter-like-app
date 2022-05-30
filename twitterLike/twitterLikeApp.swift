@@ -15,7 +15,7 @@ struct twitterLikeApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PostsList()
         }
     }
 }
