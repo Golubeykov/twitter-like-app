@@ -62,8 +62,6 @@
 				3AD48EEC28453A8E009EBC1C /* Resources */,
 				3AD48EDE2845394F009EBC1C /* twitterLikeApp.swift */,
 				3AD48EE02845394F009EBC1C /* ContentView.swift */,
-				3AD48EE228453952009EBC1C /* Assets.xcassets */,
-				3AD48EE428453952009EBC1C /* Preview Content */,
 			);
 			path = twitterLike;
 			sourceTree = "<group>";
@@ -79,6 +77,8 @@
 		3AD48EEC28453A8E009EBC1C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3AD48EE228453952009EBC1C /* Assets.xcassets */,
+				3AD48EE428453952009EBC1C /* Preview Content */,
 				3A2C84CE284549F000F5ADC1 /* GoogleService-Info.plist */,
 			);
 			path = Resources;
@@ -292,7 +292,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"twitterLike/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "twitterLike/Resources/Preview\\ Content";
 				DEVELOPMENT_TEAM = X6S824DCXB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -322,7 +322,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"twitterLike/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "twitterLike/Resources/Preview\\ Content";
 				DEVELOPMENT_TEAM = X6S824DCXB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
