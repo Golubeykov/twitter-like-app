@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A2C84C92845461A00F5ADC1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2C84C82845461A00F5ADC1 /* FirebaseAnalytics */; };
+		3A2C84CB2845461A00F5ADC1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2C84CA2845461A00F5ADC1 /* FirebaseFirestore */; };
+		3A2C84CD2845461A00F5ADC1 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2C84CC2845461A00F5ADC1 /* FirebaseFirestoreSwift */; };
+		3A2C84CF284549F000F5ADC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A2C84CE284549F000F5ADC1 /* GoogleService-Info.plist */; };
 		3AD48EDF2845394F009EBC1C /* twitterLikeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD48EDE2845394F009EBC1C /* twitterLikeApp.swift */; };
 		3AD48EE12845394F009EBC1C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD48EE02845394F009EBC1C /* ContentView.swift */; };
 		3AD48EE328453952009EBC1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AD48EE228453952009EBC1C /* Assets.xcassets */; };
@@ -14,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A2C84CE284549F000F5ADC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3AD48EDB2845394F009EBC1C /* twitterLike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twitterLike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD48EDE2845394F009EBC1C /* twitterLikeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = twitterLikeApp.swift; sourceTree = "<group>"; };
 		3AD48EE02845394F009EBC1C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -26,6 +31,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A2C84C92845461A00F5ADC1 /* FirebaseAnalytics in Frameworks */,
+				3A2C84CB2845461A00F5ADC1 /* FirebaseFirestore in Frameworks */,
+				3A2C84CD2845461A00F5ADC1 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +59,7 @@
 		3AD48EDD2845394F009EBC1C /* twitterLike */ = {
 			isa = PBXGroup;
 			children = (
+				3AD48EEC28453A8E009EBC1C /* Resources */,
 				3AD48EDE2845394F009EBC1C /* twitterLikeApp.swift */,
 				3AD48EE02845394F009EBC1C /* ContentView.swift */,
 				3AD48EE228453952009EBC1C /* Assets.xcassets */,
@@ -65,6 +74,14 @@
 				3AD48EE528453952009EBC1C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3AD48EEC28453A8E009EBC1C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3A2C84CE284549F000F5ADC1 /* GoogleService-Info.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +100,11 @@
 			dependencies = (
 			);
 			name = twitterLike;
+			packageProductDependencies = (
+				3A2C84C82845461A00F5ADC1 /* FirebaseAnalytics */,
+				3A2C84CA2845461A00F5ADC1 /* FirebaseFirestore */,
+				3A2C84CC2845461A00F5ADC1 /* FirebaseFirestoreSwift */,
+			);
 			productName = twitterLike;
 			productReference = 3AD48EDB2845394F009EBC1C /* twitterLike.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +133,9 @@
 				Base,
 			);
 			mainGroup = 3AD48ED22845394E009EBC1C;
+			packageReferences = (
+				3A2C84C72845461A00F5ADC1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 3AD48EDC2845394F009EBC1C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +152,7 @@
 			files = (
 				3AD48EE628453952009EBC1C /* Preview Assets.xcassets in Resources */,
 				3AD48EE328453952009EBC1C /* Assets.xcassets in Resources */,
+				3A2C84CF284549F000F5ADC1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +301,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -284,7 +311,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -304,6 +331,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -313,7 +341,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -339,6 +367,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3A2C84C72845461A00F5ADC1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3A2C84C82845461A00F5ADC1 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A2C84C72845461A00F5ADC1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		3A2C84CA2845461A00F5ADC1 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A2C84C72845461A00F5ADC1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		3A2C84CC2845461A00F5ADC1 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A2C84C72845461A00F5ADC1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3AD48ED32845394E009EBC1C /* Project object */;
 }

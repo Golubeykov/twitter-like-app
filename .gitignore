@@ -89,6 +89,4 @@ fastlane/test_output
 
 iOSInjectionProject/
 
-/Socialcademy App/Resources/
-/Socialcademy App/Resources/GoogleService-Info.plist
-/Socialcademy App/Resources/Assets.xcassets
+/twitterLike/Resources/GoogleService-Info.plist
