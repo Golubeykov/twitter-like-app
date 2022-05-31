@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 class PostsViewModel: ObservableObject {
-    @Published var posts = [Post]()
+    @Published var posts: Loadable<[Post]> = .loading
     
     // Implemententation of create action, that will be called from PostsLists and then sent to NewPostForm.
     func makeCreateAction() -> NewPostForm.CreateAction {
@@ -17,16 +17,17 @@ class PostsViewModel: ObservableObject {
             // Upload post to Firestore
             try await PostsRepository.create(post)
             // Add post locally
-            self?.posts.insert(post, at: 0)
+            self?.posts.value?.insert(post, at: 0)
         }
     }
     func fetchPosts() {
         Task {
             do {
-                posts = try await PostsRepository.fetchPosts()
+                posts = .loaded(try await PostsRepository.fetchPosts())
             }
             catch {
                 print("[PostsViewModel] Cannot fetch posts: \(error)")
+                posts = .error(error)
             }
         }
     }
