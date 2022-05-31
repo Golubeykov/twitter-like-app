@@ -14,7 +14,7 @@ struct NewPostForm: View {
     @Environment(\.dismiss) private var dismiss
     
     //Closure for a post creation (implementation is recieved from viewModel)
-    typealias CreateAction = (Post) -> Void
+    typealias CreateAction = (Post) async throws -> Void
     let createAction: CreateAction
     
     //Body of the view
@@ -45,8 +45,14 @@ struct NewPostForm: View {
     
     //Function, initiating creation of a post
     private func createPost() {
-        createAction(post)
-        dismiss()
+        Task {
+            do {
+                try await createAction(post)
+                dismiss()
+            } catch {
+                print("[NewPostForm] Cannot create post: \(error)")
+            }
+        }
     }
 }
 

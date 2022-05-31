@@ -14,6 +14,9 @@ class PostsViewModel: ObservableObject {
     // Implemententation of create action, that will be called from PostsLists and then sent to NewPostForm
     func makeCreateAction() -> NewPostForm.CreateAction {
         return { [weak self] post in
+            // Upload post to Firestore
+            try await PostsRepository.create(post)
+            // Add post locally
             self?.posts.insert(post, at: 0)
         }
     }
