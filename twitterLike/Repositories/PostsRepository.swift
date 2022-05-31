@@ -11,10 +11,23 @@ import FirebaseFirestoreSwift
 
 struct PostsRepository {
     static let postsReference = Firestore.firestore().collection("posts")
- 
+    
+    //Create post in Firestore from NewPostForm
     static func create(_ post: Post) async throws {
         let document = postsReference.document(post.id.uuidString)
         try await document.setData(from: post)
+    }
+    //Load posts from Firestore after App start
+    static func fetchPosts() async throws -> [Post] {
+        //Download a snapshot from Firestore
+        let snapshot = try await postsReference
+            .order(by: "timestamp", descending: true)
+            .getDocuments()
+        //Convert snapshot into Post struct
+        return snapshot.documents.compactMap {
+            document in
+            try! document.data(as: Post.self)
+        }
     }
 }
 

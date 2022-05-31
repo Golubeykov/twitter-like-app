@@ -9,15 +9,25 @@ import Foundation
 
 @MainActor
 class PostsViewModel: ObservableObject {
-    @Published var posts = [Post.testPost]
+    @Published var posts = [Post]()
     
-    // Implemententation of create action, that will be called from PostsLists and then sent to NewPostForm
+    // Implemententation of create action, that will be called from PostsLists and then sent to NewPostForm.
     func makeCreateAction() -> NewPostForm.CreateAction {
         return { [weak self] post in
             // Upload post to Firestore
             try await PostsRepository.create(post)
             // Add post locally
             self?.posts.insert(post, at: 0)
+        }
+    }
+    func fetchPosts() {
+        Task {
+            do {
+                posts = try await PostsRepository.fetchPosts()
+            }
+            catch {
+                print("[PostsViewModel] Cannot fetch posts: \(error)")
+            }
         }
     }
 }
