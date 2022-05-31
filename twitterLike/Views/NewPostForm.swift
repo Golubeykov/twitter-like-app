@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NewPostForm: View {
     @State private var post = Post(title: "", content: "", authorName: "")
+    @State private var state = FormState.idle
     
     // Dismiss modal view
     @Environment(\.dismiss) private var dismiss
@@ -30,7 +31,11 @@ struct NewPostForm: View {
                         .multilineTextAlignment(.leading)
                 }
                 Button(action: createPost) {
-                    Text("Create Post")
+                    if state == .working {
+                        ProgressView()
+                    } else {
+                        Text("Create Post")
+                    }
                 }
                 .font(.headline)
                 .frame(maxWidth: .infinity)
@@ -41,16 +46,37 @@ struct NewPostForm: View {
             .navigationTitle("New Post")
             .onSubmit(createPost)
         }
+        //Disable view while network call
+        .disabled(state == .working)
+        .alert("Cannot Create Post", isPresented: $state.isError, actions: {}, message: {Text("Sorry, something went wrong.")})
     }
     
     //Function, initiating creation of a post
     private func createPost() {
         Task {
+            state = .working
             do {
                 try await createAction(post)
                 dismiss()
             } catch {
                 print("[NewPostForm] Cannot create post: \(error)")
+                state = .error
+            }
+        }
+    }
+}
+
+private extension NewPostForm {
+    enum FormState {
+        case idle, working, error
+        
+        var isError: Bool {
+            get {
+                self == .error
+            }
+            set {
+                guard !newValue else { return }
+                self = .idle
             }
         }
     }
