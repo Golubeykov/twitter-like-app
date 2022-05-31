@@ -4,8 +4,9 @@
 //
 //  Created by Антон Голубейков on 31.05.2022.
 //
-// Here we describe different states of App's object (e.g. Posts that are being loaded from network).
 
+
+// Here we describe different states of App's object (e.g. Posts that are being loaded from network).
 import Foundation
 
 enum Loadable<Value> {
@@ -13,7 +14,7 @@ enum Loadable<Value> {
     case error(Error)
     case loaded(Value)
     
-    //That lets us access and modify enum's value
+    //That lets us access and modify enum's value. We pack loaded(Value) into separate computed property.
     var value: Value? {
         get {
             if case let .loaded(value) = self {
