@@ -14,6 +14,7 @@
 		3A35D4262845509100628EC1 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A35D4252845509100628EC1 /* Post.swift */; };
 		3A35D4282845510600628EC1 /* PostsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A35D4272845510600628EC1 /* PostsList.swift */; };
 		3A35D42A2845FF0E00628EC1 /* PostRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A35D4292845FF0E00628EC1 /* PostRow.swift */; };
+		3A35D42C2846062800628EC1 /* NewPostForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A35D42B2846062800628EC1 /* NewPostForm.swift */; };
 		3AD48EDF2845394F009EBC1C /* twitterLikeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD48EDE2845394F009EBC1C /* twitterLikeApp.swift */; };
 		3AD48EE328453952009EBC1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AD48EE228453952009EBC1C /* Assets.xcassets */; };
 		3AD48EE628453952009EBC1C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AD48EE528453952009EBC1C /* Preview Assets.xcassets */; };
@@ -24,6 +25,7 @@
 		3A35D4252845509100628EC1 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		3A35D4272845510600628EC1 /* PostsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsList.swift; sourceTree = "<group>"; };
 		3A35D4292845FF0E00628EC1 /* PostRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRow.swift; sourceTree = "<group>"; };
+		3A35D42B2846062800628EC1 /* NewPostForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostForm.swift; sourceTree = "<group>"; };
 		3AD48EDB2845394F009EBC1C /* twitterLike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twitterLike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD48EDE2845394F009EBC1C /* twitterLikeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = twitterLikeApp.swift; sourceTree = "<group>"; };
 		3AD48EE228453952009EBC1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 			children = (
 				3A35D4272845510600628EC1 /* PostsList.swift */,
 				3A35D4292845FF0E00628EC1 /* PostRow.swift */,
+				3A35D42B2846062800628EC1 /* NewPostForm.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				3AD48EDF2845394F009EBC1C /* twitterLikeApp.swift in Sources */,
 				3A35D42A2845FF0E00628EC1 /* PostRow.swift in Sources */,
 				3A35D4282845510600628EC1 /* PostsList.swift in Sources */,
+				3A35D42C2846062800628EC1 /* NewPostForm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
