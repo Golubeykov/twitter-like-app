@@ -38,21 +38,24 @@ class PostsViewModel: ObservableObject {
             self?.posts.value?.insert(post, at: 0)
         }
     }
-    //MARK: - Delete action (to be called from PostRow)
-    func makeDeleteAction(for post: Post) -> PostRow.Action {
-        return { [weak self] in
-            try await self?.postsRepository.delete(post)
-            self?.posts.value?.removeAll { $0.id == post.id }
-        }
-    }
-    //MARK: - Favorite post action
-    func makeFavoriteAction(for post: Post) -> () async throws -> Void {
-        return { [weak self] in
-            //Determine the new value of isFavorite, which is the opposite of its former value
-            let newValue = !post.isFavorite
-            try await newValue ? self?.postsRepository.favorite(post) : self?.postsRepository.unfavorite(post)
-            guard let i = self?.posts.value?.firstIndex(of: post) else { return }
-            self?.posts.value?[i].isFavorite = newValue
-        }
+
+    //MARK: - Produces a PostRowViewModel for the given post
+    func makePostRowViewModel(for post: Post) -> PostRowViewModel {
+        return PostRowViewModel(
+            post: post,
+            deleteAction: {
+                [weak self] in
+                    try await self?.postsRepository.delete(post)
+                    self?.posts.value?.removeAll { $0.id == post.id }
+            },
+            favoriteAction: {
+                [weak self] in
+                    //Determine the new value of isFavorite, which is the opposite of its former value
+                    let newValue = !post.isFavorite
+                    try await newValue ? self?.postsRepository.favorite(post) : self?.postsRepository.unfavorite(post)
+                    guard let i = self?.posts.value?.firstIndex(of: post) else { return }
+                    self?.posts.value?[i].isFavorite = newValue
+            }
+        )
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A04F2522847C22A001CCF11 /* PostRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04F2512847C22A001CCF11 /* PostRowViewModel.swift */; };
 		3A2C84C92845461A00F5ADC1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2C84C82845461A00F5ADC1 /* FirebaseAnalytics */; };
 		3A2C84CB2845461A00F5ADC1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2C84CA2845461A00F5ADC1 /* FirebaseFirestore */; };
 		3A2C84CD2845461A00F5ADC1 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2C84CC2845461A00F5ADC1 /* FirebaseFirestoreSwift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A04F2512847C22A001CCF11 /* PostRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRowViewModel.swift; sourceTree = "<group>"; };
 		3A2C84CE284549F000F5ADC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3A35D4252845509100628EC1 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		3A35D4272845510600628EC1 /* PostsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsList.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				3A35D42E2846132000628EC1 /* PostsViewModel.swift */,
+				3A04F2512847C22A001CCF11 /* PostRowViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A04F2522847C22A001CCF11 /* PostRowViewModel.swift in Sources */,
 				3A35D4262845509100628EC1 /* Post.swift in Sources */,
 				3AD48EDF2845394F009EBC1C /* twitterLikeApp.swift in Sources */,
 				3A35D43228461CB800628EC1 /* PostsRepository.swift in Sources */,

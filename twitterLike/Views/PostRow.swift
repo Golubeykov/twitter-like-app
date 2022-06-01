@@ -10,32 +10,27 @@ import SwiftUI
 // A separate view for a post itself. List of PostRow views is presented on  PostsLists view.
 
 struct PostRow: View {
-    typealias Action = () async throws -> Void
-    
-    let post: Post
-    let deleteAction: Action
-    let favoriteAction: Action
+    @ObservedObject var viewModel: PostRowViewModel
     
     @State private var showConfirmationDialog = false
-    @State private var error: Error?
     
     var body: some View {
            VStack(alignment: .leading, spacing: 10) {
                HStack {
-                   Text(post.authorName)
+                   Text(viewModel.authorName)
                        .font(.subheadline)
                        .fontWeight(.medium)
                    Spacer()
-                   Text(post.timestamp.formatted(date: .abbreviated, time: .omitted))
+                   Text(viewModel.timestamp.formatted(date: .abbreviated, time: .omitted))
                        .font(.caption)
                }
                .foregroundColor(.gray)
-               Text(post.title)
+               Text(viewModel.title)
                    .font(.title3)
                    .fontWeight(.semibold)
-               Text(post.content)
+               Text(viewModel.content)
                HStack {
-                   FavoriteButton(isFavorite: post.isFavorite, action: favoritePost)
+                   FavoriteButton(isFavorite: viewModel.isFavorite, action: { viewModel.favoritePost() })
                    Spacer()
                    Button(role: .destructive, action: { showConfirmationDialog = true }, label: { Image(systemName: "trash") })
                }
@@ -44,32 +39,11 @@ struct PostRow: View {
            }
            .padding(.vertical)
            .confirmationDialog("Are you sure you want to delete this post?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
-               Button("Delete", role: .destructive, action: deletePost)
+               Button("Delete", role: .destructive, action: { viewModel.deletePost() })
            }
-           .alert("Cannot Delete Post", error: $error)
+           .alert("Error", error: $viewModel.error)
        }
-    // This function to be called when delete button is tapped
-    private func deletePost() {
-        Task {
-            do {
-                try await deleteAction()
-            } catch {
-                print("[PostRow] Cannot delete post: \(error)")
-                self.error = error
-            }
-        }
-    }
-    // This function to be called when "favorite" button is tapped
-    private func favoritePost() {
-        Task {
-            do {
-                try await favoriteAction()
-            } catch {
-                print("[PostRow] Cannot favorite post: \(error)")
-                self.error = error
-            }
-        }
-    }
+
 }
 
 //MARK: - Implementation of "favorite" button
@@ -93,8 +67,10 @@ private extension PostRow {
 }
 
 struct PostRow_Previews: PreviewProvider {
-    static var testPost = Post.testPost
     static var previews: some View {
-        PostRow(post: testPost, deleteAction: {}, favoriteAction: {})
+        List {
+            PostRow(viewModel: PostRowViewModel(post: Post.testPost, deleteAction: {}, favoriteAction: {}))
+        }
     }
 }
+
