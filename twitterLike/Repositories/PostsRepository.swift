@@ -13,10 +13,12 @@ protocol PostsRepositoryProtocol {
     func fetchPosts() async throws -> [Post]
     func create(_ post: Post) async throws
     func delete(_ post: Post) async throws
+    func favorite(_ post: Post) async throws
+    func unfavorite(_ post: Post) async throws
 }
 
 struct PostsRepository: PostsRepositoryProtocol {
-    let postsReference = Firestore.firestore().collection("posts")
+    let postsReference = Firestore.firestore().collection("posts_v1")
     
     //Load posts from Firestore after App start
     func fetchPosts() async throws -> [Post] {
@@ -39,6 +41,16 @@ struct PostsRepository: PostsRepositoryProtocol {
     func delete(_ post: Post) async throws {
         let document = postsReference.document(post.id.uuidString)
         try await document.delete()
+    }
+    //Favorite post
+    func favorite(_ post: Post) async throws {
+        let document = postsReference.document(post.id.uuidString)
+        try await document.setData(["isFavorite": true], merge: true)
+    }
+    //Unfavorite post
+    func unfavorite(_ post: Post) async throws {
+        let document = postsReference.document(post.id.uuidString)
+        try await document.setData(["isFavorite": false], merge: true)
     }
 }
 
@@ -71,5 +83,9 @@ struct PostsRepositoryStub: PostsRepositoryProtocol {
     func create(_ post: Post) async throws {}
     
     func delete(_ post: Post) async throws {}
+    
+    func favorite(_ post: Post) async throws {}
+ 
+    func unfavorite(_ post: Post) async throws {}
 }
 #endif
