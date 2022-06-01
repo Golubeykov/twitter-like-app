@@ -12,16 +12,12 @@ import FirebaseFirestoreSwift
 protocol PostsRepositoryProtocol {
     func fetchPosts() async throws -> [Post]
     func create(_ post: Post) async throws
+    func delete(_ post: Post) async throws
 }
 
 struct PostsRepository: PostsRepositoryProtocol {
     let postsReference = Firestore.firestore().collection("posts")
     
-    //Create post in Firestore from NewPostForm
-    func create(_ post: Post) async throws {
-        let document = postsReference.document(post.id.uuidString)
-        try await document.setData(from: post)
-    }
     //Load posts from Firestore after App start
     func fetchPosts() async throws -> [Post] {
         //Download a snapshot from Firestore
@@ -33,6 +29,16 @@ struct PostsRepository: PostsRepositoryProtocol {
             document in
             try! document.data(as: Post.self)
         }
+    }
+    //Create post in Firestore from NewPostForm
+    func create(_ post: Post) async throws {
+        let document = postsReference.document(post.id.uuidString)
+        try await document.setData(from: post)
+    }
+    //Delete post in Firestore
+    func delete(_ post: Post) async throws {
+        let document = postsReference.document(post.id.uuidString)
+        try await document.delete()
     }
 }
 
@@ -63,5 +69,7 @@ struct PostsRepositoryStub: PostsRepositoryProtocol {
     }
  
     func create(_ post: Post) async throws {}
+    
+    func delete(_ post: Post) async throws {}
 }
 #endif

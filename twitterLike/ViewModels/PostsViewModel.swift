@@ -17,15 +17,7 @@ class PostsViewModel: ObservableObject {
         self.postsRepository = postsRepository
     }
     
-    // Implemententation of create action, that will be called from PostsLists and then sent to NewPostForm.
-    func makeCreateAction() -> NewPostForm.CreateAction {
-        return { [weak self] post in
-            // Upload post to Firestore
-            try await self?.postsRepository.create(post)
-            // Add post locally
-            self?.posts.value?.insert(post, at: 0)
-        }
-    }
+    //MARK: - Fetching posts after app's launch (to be called from PostsList)
     func fetchPosts() {
         Task {
             do {
@@ -35,6 +27,22 @@ class PostsViewModel: ObservableObject {
                 print("[PostsViewModel] Cannot fetch posts: \(error)")
                 posts = .error(error)
             }
+        }
+    }
+    //MARK: - Implemententation of create action, that will be called from NewPostForm (but sent there via PostsList).
+    func makeCreateAction() -> NewPostForm.CreateAction {
+        return { [weak self] post in
+            // Upload post to Firestore
+            try await self?.postsRepository.create(post)
+            // Add post locally
+            self?.posts.value?.insert(post, at: 0)
+        }
+    }
+    //MARK: - Delete action (to be called from PostRow)
+    func makeDeleteAction(for post: Post) -> PostRow.DeleteAction {
+        return { [weak self] in
+            try await self?.postsRepository.delete(post)
+            self?.posts.value?.removeAll { $0.id == post.id }
         }
     }
 }
