@@ -46,7 +46,7 @@ struct PostsList: View {
                 }
             }
             .searchable(text: $searchText)
-            .navigationTitle("Posts")
+            .navigationTitle(viewModel.title)
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarTrailing, content: {
                     Button(action: { showNewPostForm = true }, label: { Image(systemName: "square.and.pencil") })

@@ -9,11 +9,26 @@ import Foundation
 
 @MainActor
 class PostsViewModel: ObservableObject {
+    //MARK: - Filter for tab
+    enum Filter {
+        case all, favorites
+    }
+    private let filter: Filter
+    var title: String {
+        switch filter {
+        case .all:
+            return "Posts"
+        case .favorites:
+            return "Favorites"
+        }
+    }
+    //MARK: - Futher implementation
     @Published var posts: Loadable<[Post]> = .loading
     private let postsRepository: PostsRepositoryProtocol
     
     //Initiating default implementation of PostsVM methods
-    init(postsRepository: PostsRepositoryProtocol = PostsRepository()) {
+    init(filter: Filter = .all, postsRepository: PostsRepositoryProtocol = PostsRepository()) {
+        self.filter = filter
         self.postsRepository = postsRepository
     }
     
@@ -21,7 +36,7 @@ class PostsViewModel: ObservableObject {
     func fetchPosts() {
         Task {
             do {
-                posts = .loaded(try await postsRepository.fetchPosts())
+                posts = .loaded(try await postsRepository.fetchPosts(matching: filter))
             }
             catch {
                 print("[PostsViewModel] Cannot fetch posts: \(error)")
@@ -57,5 +72,16 @@ class PostsViewModel: ObservableObject {
                     self?.posts.value?[i].isFavorite = newValue
             }
         )
+    }
+}
+//MARK: - This method uses a switch statement to call the correct PostsRepository method for our filter
+private extension PostsRepositoryProtocol {
+    func fetchPosts(matching filter: PostsViewModel.Filter) async throws -> [Post] {
+        switch filter {
+        case .all:
+            return try await fetchAllPosts()
+        case .favorites:
+            return try await fetchFavoritePosts()
+        }
     }
 }
