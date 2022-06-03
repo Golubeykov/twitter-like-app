@@ -9,6 +9,8 @@ import Foundation
 
 @MainActor
 class PostsViewModel: ObservableObject {
+    @Published var user: User?
+
     //MARK: - Filter for tab
     enum Filter {
         case all, favorites
@@ -27,7 +29,7 @@ class PostsViewModel: ObservableObject {
     private let postsRepository: PostsRepositoryProtocol
     
     //Initiating default implementation of PostsVM methods
-    init(filter: Filter = .all, postsRepository: PostsRepositoryProtocol = PostsRepository()) {
+    init(filter: Filter = .all, postsRepository: PostsRepositoryProtocol) {
         self.filter = filter
         self.postsRepository = postsRepository
     }
@@ -44,32 +46,32 @@ class PostsViewModel: ObservableObject {
             }
         }
     }
-    //MARK: - Implemententation of create action, that will be called from NewPostForm (but sent there via PostsList).
-    func makeCreateAction() -> NewPostForm.CreateAction {
-        return { [weak self] post in
-            // Upload post to Firestore
-            try await self?.postsRepository.create(post)
-            // Add post locally
-            self?.posts.value?.insert(post, at: 0)
-        }
-    }
 
     //MARK: - Produces a PostRowViewModel for the given post
     func makePostRowViewModel(for post: Post) -> PostRowViewModel {
+        let deleteAction = { [weak self] in
+            try await self?.postsRepository.delete(post)
+            self?.posts.value?.removeAll { $0 == post }
+        }
+        let favoriteAction = { [weak self] in
+            let newValue = !post.isFavorite
+            try await newValue ? self?.postsRepository.favorite(post) : self?.postsRepository.unfavorite(post)
+            guard let i = self?.posts.value?.firstIndex(of: post) else { return }
+            self?.posts.value?[i].isFavorite = newValue
+        }
         return PostRowViewModel(
             post: post,
-            deleteAction: {
-                [weak self] in
-                    try await self?.postsRepository.delete(post)
-                    self?.posts.value?.removeAll { $0.id == post.id }
-            },
-            favoriteAction: {
-                [weak self] in
-                    //Determine the new value of isFavorite, which is the opposite of its former value
-                    let newValue = !post.isFavorite
-                    try await newValue ? self?.postsRepository.favorite(post) : self?.postsRepository.unfavorite(post)
-                    guard let i = self?.posts.value?.firstIndex(of: post) else { return }
-                    self?.posts.value?[i].isFavorite = newValue
+            deleteAction: postsRepository.canDelete(post) ? deleteAction : nil,
+            favoriteAction: favoriteAction
+        )
+    }
+    //MARK: - Prepares the view model for the NewPostForm
+    func makeNewPostViewModel() -> FormViewModel<Post> {
+        return FormViewModel<Post>(
+            initialValue: Post(title: "", content: "", author: postsRepository.user),
+            action: { [weak self] post in
+                try await self?.postsRepository.create(post)
+                self?.posts.value?.insert(post, at: 0)
             }
         )
     }

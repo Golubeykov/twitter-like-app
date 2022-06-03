@@ -9,12 +9,12 @@ import Foundation
 
 @MainActor
 class AuthViewModel: ObservableObject {
-    @Published var isAuthenticated = false
+    @Published var user: User?
     
     private let authService = AuthService()
  
     init() {
-        authService.$isAuthenticated.assign(to: &$isAuthenticated)
+        authService.$user.assign(to: &$user)
     }
     
     //MARK: - initilizing SignIn/CreateAccountViewModels (see below)

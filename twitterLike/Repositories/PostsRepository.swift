@@ -16,10 +16,13 @@ protocol PostsRepositoryProtocol {
     func delete(_ post: Post) async throws
     func favorite(_ post: Post) async throws
     func unfavorite(_ post: Post) async throws
+    
+    var user: User { get }
 }
 
 struct PostsRepository: PostsRepositoryProtocol {
-    let postsReference = Firestore.firestore().collection("posts_v1")
+    let postsReference = Firestore.firestore().collection("posts_v2")
+    let user: User
     
     //MARK: - Helper method that shares logic for fetchAllPosts and fetchFavoritePosts (see below)
     private func fetchPosts(from query: Query) async throws -> [Post] {
@@ -47,6 +50,7 @@ struct PostsRepository: PostsRepositoryProtocol {
     }
     //MARK: - Delete post in Firestore
     func delete(_ post: Post) async throws {
+        precondition(canDelete(post))
         let document = postsReference.document(post.id.uuidString)
         try await document.delete()
     }
@@ -59,6 +63,12 @@ struct PostsRepository: PostsRepositoryProtocol {
     func unfavorite(_ post: Post) async throws {
         let document = postsReference.document(post.id.uuidString)
         try await document.setData(["isFavorite": false], merge: true)
+    }
+}
+//MARK: - This defines a canDelete(_:) method that returns true when the post’s author ID matches the ID of the current user.
+extension PostsRepositoryProtocol {
+    func canDelete(_ post: Post) -> Bool {
+        post.author.id == user.id
     }
 }
 
@@ -99,5 +109,7 @@ struct PostsRepositoryStub: PostsRepositoryProtocol {
     func favorite(_ post: Post) async throws {}
  
     func unfavorite(_ post: Post) async throws {}
+    
+    var user = User.testUser
 }
 #endif

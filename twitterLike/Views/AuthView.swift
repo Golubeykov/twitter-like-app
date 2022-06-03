@@ -9,10 +9,13 @@ import SwiftUI
 
 struct AuthView: View {
     @StateObject var viewModel = AuthViewModel()
- 
+
     var body: some View {
-        if viewModel.isAuthenticated {
+        if let user = viewModel.user {
+            if user.name != "" {
             MainTabView()
+                .environmentObject(ViewModelFactory(user: user))
+            }
         } else {
             NavigationView {
                 SignInForm(viewModel: viewModel.makeSignInViewModel()) {
@@ -39,13 +42,13 @@ private extension AuthView {
             } footer: {
                 Button("Create Account", action: viewModel.submit)
                     .buttonStyle(.primary)
+                    .disabled(viewModel.name.isEmpty || viewModel.email.isEmpty || viewModel.password.isEmpty)
                 Button("Sign In", action: dismiss.callAsFunction)
                     .padding()
             }
             .onSubmit(viewModel.submit)
             .alert("Cannot Create Account", error: $viewModel.error)
             .disabled(viewModel.isWorking)
-            
         }
     }
 }
@@ -64,6 +67,7 @@ private extension AuthView {
             } footer: {
                 Button("Sign In", action: viewModel.submit)
                     .buttonStyle(.primary)
+                    .disabled(viewModel.email.isEmpty || viewModel.password.isEmpty)
                 footer()
                     .padding()
             }

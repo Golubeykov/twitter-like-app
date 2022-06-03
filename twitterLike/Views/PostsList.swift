@@ -10,7 +10,7 @@ import SwiftUI
 // A view for a list of posts (post itself is constructed on PostRow view)
 
 struct PostsList: View {
-    @StateObject var viewModel = PostsViewModel()
+    @StateObject var viewModel: PostsViewModel
  
     @State private var searchText = ""
     @State private var showNewPostForm = false
@@ -53,7 +53,7 @@ struct PostsList: View {
                 })
             })
             .sheet(isPresented: $showNewPostForm, content: {
-                NewPostForm(createAction: viewModel.makeCreateAction())
+                NewPostForm(viewModel: viewModel.makeNewPostViewModel())
             })
             .onAppear {
                 viewModel.fetchPosts()
