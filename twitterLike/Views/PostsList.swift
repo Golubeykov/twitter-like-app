@@ -16,7 +16,6 @@ struct PostsList: View {
     @State private var showNewPostForm = false
     
     var body: some View {
-        NavigationView {
             Group {
                 //Depending on network call result different views are presented
                 switch viewModel.posts {
@@ -36,13 +35,15 @@ struct PostsList: View {
                         message: "There aren’t any posts yet."
                     )
                 case let .loaded(posts):
-                    List(posts) { post in
-                        if searchText.isEmpty || post.contains(searchText) {
-                            PostRow(viewModel: viewModel.makePostRowViewModel(for: post))
+                    ScrollView {
+                        ForEach(posts) { post in
+                            if searchText.isEmpty || post.contains(searchText) {
+                                PostRow(viewModel: viewModel.makePostRowViewModel(for: post))
+                            }
                         }
+                        .searchable(text: $searchText)
+                        .animation(.default, value: posts)
                     }
-                    .searchable(text: $searchText)
-                    .animation(.default, value: posts)
                 }
             }
             .searchable(text: $searchText)
@@ -58,7 +59,6 @@ struct PostsList: View {
             .onAppear {
                 viewModel.fetchPosts()
             }
-        }
     }
 }
 
@@ -71,7 +71,9 @@ struct PostsList_Previews: PreviewProvider {
         var body: some View {
             let postsRepository = PostsRepositoryStub(state: state)
             let viewModel = PostsViewModel(postsRepository: postsRepository)
+            NavigationView {
             PostsList(viewModel: viewModel)
+            }
         }
     }
     static var previews: some View {
