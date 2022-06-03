@@ -10,6 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 protocol PostsRepositoryProtocol {
+    func fetchPosts(by author: User) async throws -> [Post]
     func fetchAllPosts() async throws -> [Post]
     func fetchFavoritePosts() async throws -> [Post]
     func create(_ post: Post) async throws
@@ -24,6 +25,10 @@ struct PostsRepository: PostsRepositoryProtocol {
     let postsReference = Firestore.firestore().collection("posts_v2")
     let user: User
     
+    // MARK: - This uses our fetchPosts(from:) helper to fetch all posts where the author.id field matches the ID of the given author.
+    func fetchPosts(by author: User) async throws -> [Post] {
+        return try await fetchPosts(from: postsReference.whereField("author.id", isEqualTo: author.id))
+    }
     //MARK: - Helper method that shares logic for fetchAllPosts and fetchFavoritePosts (see below)
     private func fetchPosts(from query: Query) async throws -> [Post] {
         let snapshot = try await query
@@ -93,7 +98,10 @@ private extension DocumentReference {
 #if DEBUG
 struct PostsRepositoryStub: PostsRepositoryProtocol {
     let state: Loadable<[Post]>
- 
+    func fetchPosts(by author: User) async throws -> [Post] {
+        return try await state.simulate()
+    }
+    
     func fetchAllPosts() async throws -> [Post] {
         return try await state.simulate()
     }

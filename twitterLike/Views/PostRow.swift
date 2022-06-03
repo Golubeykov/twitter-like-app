@@ -17,9 +17,7 @@ struct PostRow: View {
     var body: some View {
            VStack(alignment: .leading, spacing: 10) {
                HStack {
-                   Text(viewModel.author.name)
-                       .font(.subheadline)
-                       .fontWeight(.medium)
+                   AuthorView(author: viewModel.author)
                    Spacer()
                    Text(viewModel.timestamp.formatted(date: .abbreviated, time: .omitted))
                        .font(.caption)
@@ -68,6 +66,24 @@ private extension PostRow {
             }
             .foregroundColor(isFavorite ? .red : .gray)
             .animation(.default, value: isFavorite)
+        }
+    }
+}
+//MARK: - This defines the AuthorView, which consists of a NavigationLink labeled with the author’s name. When we tap the link, we used the ViewModelFactory to display a PostsList with all of the author’s posts.
+private extension PostRow {
+    struct AuthorView: View {
+        let author: User
+     
+        @EnvironmentObject private var factory: ViewModelFactory
+     
+        var body: some View {
+            NavigationLink {
+                PostsList(viewModel: factory.makePostsViewModel(filter: .author(author)))
+            } label: {
+                Text(author.name)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+            }
         }
     }
 }
