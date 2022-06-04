@@ -18,6 +18,12 @@
 		3A04F2642849093C001CCF11 /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04F2632849093B001CCF11 /* PrimaryButtonStyle.swift */; };
 		3A04F268284A1AB9001CCF11 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04F267284A1AB9001CCF11 /* User.swift */; };
 		3A04F26A284A2123001CCF11 /* ViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04F269284A2123001CCF11 /* ViewModelFactory.swift */; };
+		3A04F26C284B6F77001CCF11 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04F26B284B6F77001CCF11 /* Comment.swift */; };
+		3A04F26E284B6FB6001CCF11 /* CommentsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04F26D284B6FB6001CCF11 /* CommentsRepository.swift */; };
+		3A04F270284B70B3001CCF11 /* Firestore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04F26F284B70B3001CCF11 /* Firestore+Extension.swift */; };
+		3A04F272284B73B7001CCF11 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04F271284B73B7001CCF11 /* CommentsViewModel.swift */; };
+		3A04F274284B7427001CCF11 /* CommentsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04F273284B7427001CCF11 /* CommentsList.swift */; };
+		3A04F276284B74DB001CCF11 /* CommentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04F275284B74DB001CCF11 /* CommentRow.swift */; };
 		3A2C84C92845461A00F5ADC1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2C84C82845461A00F5ADC1 /* FirebaseAnalytics */; };
 		3A2C84CB2845461A00F5ADC1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2C84CA2845461A00F5ADC1 /* FirebaseFirestore */; };
 		3A2C84CD2845461A00F5ADC1 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2C84CC2845461A00F5ADC1 /* FirebaseFirestoreSwift */; };
@@ -47,6 +53,12 @@
 		3A04F2632849093B001CCF11 /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		3A04F267284A1AB9001CCF11 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3A04F269284A2123001CCF11 /* ViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFactory.swift; sourceTree = "<group>"; };
+		3A04F26B284B6F77001CCF11 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		3A04F26D284B6FB6001CCF11 /* CommentsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsRepository.swift; sourceTree = "<group>"; };
+		3A04F26F284B70B3001CCF11 /* Firestore+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Extension.swift"; sourceTree = "<group>"; };
+		3A04F271284B73B7001CCF11 /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
+		3A04F273284B7427001CCF11 /* CommentsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsList.swift; sourceTree = "<group>"; };
+		3A04F275284B74DB001CCF11 /* CommentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRow.swift; sourceTree = "<group>"; };
 		3A2C84CE284549F000F5ADC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3A35D4252845509100628EC1 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		3A35D4272845510600628EC1 /* PostsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsList.swift; sourceTree = "<group>"; };
@@ -102,6 +114,8 @@
 				3A35D42B2846062800628EC1 /* NewPostForm.swift */,
 				3A04F25D2848C566001CCF11 /* AuthView.swift */,
 				3A04F25F2848C60E001CCF11 /* ProfileView.swift */,
+				3A04F273284B7427001CCF11 /* CommentsList.swift */,
+				3A04F275284B74DB001CCF11 /* CommentRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -111,6 +125,7 @@
 			children = (
 				3A35D4252845509100628EC1 /* Post.swift */,
 				3A04F267284A1AB9001CCF11 /* User.swift */,
+				3A04F26B284B6F77001CCF11 /* Comment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -123,6 +138,7 @@
 				3A04F25B2848C416001CCF11 /* AuthViewModel.swift */,
 				3A04F2612848FA68001CCF11 /* FormViewModel.swift */,
 				3A04F269284A2123001CCF11 /* ViewModelFactory.swift */,
+				3A04F271284B73B7001CCF11 /* CommentsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -131,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				3A35D43128461CB800628EC1 /* PostsRepository.swift */,
+				3A04F26D284B6FB6001CCF11 /* CommentsRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -139,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				3A35D4342846378E00628EC1 /* Loadable.swift */,
+				3A04F26F284B70B3001CCF11 /* Firestore+Extension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -285,15 +303,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A04F2642849093C001CCF11 /* PrimaryButtonStyle.swift in Sources */,
+				3A04F270284B70B3001CCF11 /* Firestore+Extension.swift in Sources */,
+				3A04F26E284B6FB6001CCF11 /* CommentsRepository.swift in Sources */,
 				3A04F2522847C22A001CCF11 /* PostRowViewModel.swift in Sources */,
+				3A04F276284B74DB001CCF11 /* CommentRow.swift in Sources */,
 				3A35D4262845509100628EC1 /* Post.swift in Sources */,
 				3AD48EDF2845394F009EBC1C /* twitterLikeApp.swift in Sources */,
 				3A35D43228461CB800628EC1 /* PostsRepository.swift in Sources */,
 				3A35D42F2846132000628EC1 /* PostsViewModel.swift in Sources */,
 				3A35D42A2845FF0E00628EC1 /* PostRow.swift in Sources */,
+				3A04F274284B7427001CCF11 /* CommentsList.swift in Sources */,
 				3A04F25A2848C226001CCF11 /* AuthService.swift in Sources */,
 				3A35D4352846378E00628EC1 /* Loadable.swift in Sources */,
 				3A04F2602848C60E001CCF11 /* ProfileView.swift in Sources */,
+				3A04F272284B73B7001CCF11 /* CommentsViewModel.swift in Sources */,
+				3A04F26C284B6F77001CCF11 /* Comment.swift in Sources */,
 				3A35D4282845510600628EC1 /* PostsList.swift in Sources */,
 				3A5A791928476CE800DC360D /* Alert+Error.swift in Sources */,
 				3A04F25C2848C416001CCF11 /* AuthViewModel.swift in Sources */,
