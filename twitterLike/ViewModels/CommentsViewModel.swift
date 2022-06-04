@@ -27,6 +27,16 @@ class CommentsViewModel: ObservableObject {
             }
         }
     }
+    //This produces a FormViewModel that’s initially set to an empty comment. The action calls the create(_:) method of our CommentsRepository and adds the new comment to the list.
+    func makeNewCommentViewModel() -> FormViewModel<Comment> {
+        return FormViewModel<Comment>(
+            initialValue: Comment(content: "", author: commentsRepository.user),
+            action: { [weak self] comment in
+                try await self?.commentsRepository.create(comment)
+                self?.comments.value?.insert(comment, at: 0)
+            }
+        )
+    }
     
     
 }
